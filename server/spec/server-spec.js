@@ -10,12 +10,12 @@ describe('Persistent Node Chat Server', function() {
 
   beforeEach(function(done) {
     dbConnection = mysql.createConnection({
-      // host: '127.0.0.1:3000', ???????
+      // host: '127.0.0.1', ???????
       user: 'student',
       password: 'student',
       database: 'chat'
     });
-    dbConnection.connect(/* error-first callback here ?????? */);
+    dbConnection.connect();
 
     /* should `tablename` be an array of table names ?????? */
     var tablename = 'messages'; // TODO: fill this out
