@@ -10,13 +10,15 @@ describe('Persistent Node Chat Server', function() {
 
   beforeEach(function(done) {
     dbConnection = mysql.createConnection({
+      // host: '127.0.0.1:3000', ???????
       user: 'student',
       password: 'student',
       database: 'chat'
     });
-    dbConnection.connect();
+    dbConnection.connect(/* error-first callback here ?????? */);
 
-       var tablename = ""; // TODO: fill this out
+    /* should `tablename` be an array of table names ?????? */
+    var tablename = 'messages'; // TODO: fill this out
 
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
@@ -57,7 +59,7 @@ describe('Persistent Node Chat Server', function() {
           expect(results.length).to.equal(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).to.equal('In mercy\'s name, three days is all I need.');
+          expect(results[0].body).to.equal('In mercy\'s name, three days is all I need.');
 
           done();
         });
@@ -67,8 +69,8 @@ describe('Persistent Node Chat Server', function() {
 
   it('Should output all messages from the DB', function(done) {
     // Let's insert a message into the db
-       var queryString = "";
-       var queryArgs = [];
+    var queryString = 'INSERT INTO messages (body, created_at) VALUES (\'test\', CURRENT_TIME())';
+    var queryArgs = [];
     // TODO - The exact query string and query args to use
     // here depend on the schema you design, so I'll leave
     // them up to you. */
